@@ -1,0 +1,47 @@
+% *****************************************************************
+% Document	: Rapport écrit - Travail de semestre 1
+% Author	: RC
+% Date		: 2013-10-15
+% Version  	: 1.0, 2013-10-15, RC, CFPT-I Technicien ES, T.IN-E2B
+% *****************************************************************
+\documentclass[a4paper, 12pt]{report}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% New commands settings
+\newcommand{\titlename}{Title}
+\newcommand{\authorname}{Christopher \textsc{Rejas}}
+\newcommand{\version}{Subtitle}
+\newcommand{\school}{Centre de Formation Professionnelle Technique}
+\newcommand{\faculty}{Ecole d'informatique}
+\newcommand{\diploma}{Header title 1}
+\newcommand{\subject}{Header title 2}
+
+% Includes the others settings. (settings.tex)
+\include{include/settings}
+
+
+% *** BEGIN DOCUMENT *********************************************************
+\include{include/homepage}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+
+\chapter{Chapter}
+\section{Section}
+\subsection{Subsection}
+
+\begin{lstlisting}[label=etape-1,caption=Etape 1]
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argv, char** argv) {
+	printf("Hello world!\n");
+	return EXIT_SUCCESS;
+}
+\end{lstlisting}
+\end{document}          
+% *** END* DOCUMENT **********************************************************

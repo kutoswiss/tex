@@ -1,0 +1,177 @@
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[smaller, footnote, printonlyused]{acronym}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2.5cm]{geometry}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\usepackage{amsmath}
+\setlength{\parindent}{0pt}
+
+\def\mathLarge#1{\mbox{\LARGE $#1$}}
+
+% --- Settings for listings -----------------------------------------------------------------
+%\usepackage{listings}
+%\usepackage{color}
+%\usepackage{xcolor}
+%\usepackage{caption}
+%\DeclareCaptionFont{white}{\color{white}}
+%\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+%\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, size=small}
+%
+%\lstdefinestyle{customc}{
+%  belowcaptionskip=1\baselineskip,
+%  breaklines=true,
+%  frame=L,
+%  xleftmargin=\parindent,
+%  language=C,
+%  showstringspaces=false,
+%  basicstyle=\scriptsize\ttfamily,
+%  keywordstyle=\bfseries\color{green!40!black},
+%  commentstyle=\itshape\color{purple!40!black},
+%  identifierstyle=\color{blue},
+%  stringstyle=\color{orange},
+%}
+%\lstset{escapechar=@,style=customc}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{accsupp}
+
+% color
+\definecolor{lightgreen}{rgb}	{0.200, 0.980, 0.200}
+\definecolor{darkgreen}{rgb}	{0.000, 0.400, 0.000}
+\definecolor{lightgray}{gray}	{0.98}
+\definecolor{darkred}{rgb}		{0.545, 0.000, 0.000}
+
+% CSharp colors
+\definecolor{class}{rgb}		{0.200, 0.600, 0.600}	% Cyan Visual Studio
+\definecolor{keyword}{rgb}		{0.000, 0.000, 1.000}	% blue
+
+% code to avoid line number copy during copy-paste from PDF
+\newcommand{\noncopynumber}[1]{%
+	\BeginAccSupp{method=escape,ActualText={}}%
+	{\scriptsize#1}%
+	\EndAccSupp{}%
+}
+
+% lstlisting parameters
+\lstset {	
+	language=[Sharp]C
+	, captionpos=b
+	, frame=shadowbox
+	, rulesepcolor=\color{gray}
+	% syntaxic coloration
+	, basicstyle=\footnotesize\ttfamily
+	, keywordstyle=\color{blue}
+	, commentstyle=\color{darkgreen}
+	, stringstyle=\color{darkred}
+	, backgroundcolor=\color{lightgray}
+	, identifierstyle=\color{black}
+	% lines numbering
+	, numbers=left
+	, numberstyle=\noncopynumber
+	, stepnumber=1
+	, numbersep=5pt
+	%
+	, breaklines=true
+	, tabsize=2
+	, showstringspaces=false
+	, lineskip={-1.5pt} % single line spacing
+	, escapeinside={/*(*@}{@*)*/}
+	, rangeprefix=\{\  % curly left brace plus space
+	, rangesuffix=\ \} % space plus curly right brace
+}
+
+% Csharp : additional keywords
+\lstset{
+	morekeywords={var,get,set,string,value},
+	otherkeywords={\#region,\#endregion,\#define,\#if,\#endif,\#else}, %morekeyword does not support # chararacter then we must use otherkeywords
+	emph={[1]Application,
+		Char,Color,Console,Convert,
+		DialogResult,
+		Environment,EventArgs,
+		Form,
+		Object,String,
+		SByte,Int16,Int32,Int64,
+		Byte,UInt16,UInt32,UInt64,
+		Single,Double,
+		Keys,KeyPressEventArgs,
+		MessageBox,MessageBoxButtons},
+	emphstyle={[1]\color{class}}
+}
+
+\lstset{prebreak=\raisebox{0ex}[0ex][0ex]
+	{\ensuremath{\hookleftarrow}}}
+%\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+%        {\ensuremath{\hookrightarrow\space}}}
+\lstset{breaklines=true, breakatwhitespace=true}
+
+% --- Settings for the chapters style -------------------------------------------------------
+% Options fncychap: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+\usepackage[Bjornstrup]{fncychap}
+
+% Too reduce top margin on the top of the chapter title
+%-------------------------------------------------------
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+% \patchcmd{<cmd>}{<search>}{<replace>}{<success>}{<failure>}
+% --- Patch \chapter
+\patchcmd{\@makechapterhead}{50\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER X
+\patchcmd{\@makechapterhead}{20\p@}{\chapheadsep}{}{}% Space between CHAPTER X and CHAPTER TITLE
+\patchcmd{\@makechapterhead}{40\p@}{\chapheadbelowskip}{}{}% Space between CHAPTER TITLE and text
+% --- Patch \chapter*
+\patchcmd{\@makeschapterhead}{50\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER TITLE
+\patchcmd{\@makeschapterhead}{40\p@}{\chapheadbelowskip}{}{}% SPace between CHAPTER TITLE and text
+\makeatother
+% Set new lengths
+\newlength{\chapheadtopskip}\setlength{\chapheadtopskip}{5pt}
+\newlength{\chapheadsep}\setlength{\chapheadsep}{40pt}
+\newlength{\chapheadbelowskip}\setlength{\chapheadbelowskip}{15pt}
+%-------------------------------------------------------
+
+% To force chapter to have header and footer
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
+
+
+% --- Settings for the sections format ------------------------------------------------------
+% (Packages, color, new command)
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+
+\titleformat{\section}[hang]
+{\large\sffamily} % Number of chapter
+{\thesection \hsp}{0pt} % The separation
+{\large\bfseries} % Title of chapter
+
+% --- Settings for the subsections format ---------------------------------------------------
+% Subsection format
+\titleformat{\subsection}[hang]
+{\large\sffamily} % Number of chapter
+{\hsp \thesubsection \hsp }{0pt} % The separation
+{\large\bfseries} % Title of chapter
+
+
+% --- Settings for page margins -------------------------------------------------------------
+\pagestyle{fancy}
+\setlength{\topmargin}{-0.3in}
+\setlength{\textheight}{24cm}
+\setlength{\textwidth}{15.5cm}
+
+% Header settings
+\lhead{\small{\titlename}}
+\chead{}
+\rhead{\small}
+
+% Footer settings
+\lfoot{\small{\textsc{Rejas} C.  - \today}}
+\cfoot{}
+\rfoot{\small{\thepage/\pageref{LastPage}}}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
